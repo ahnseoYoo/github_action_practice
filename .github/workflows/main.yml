@@ -1,0 +1,17 @@
+name: test_example
+
+# 어떤 작업이 job을 트리거 하는지 명시되어 있음. 예시에서는 푸쉬와 풀리퀘스트에서 트리거 됨. 
+on: [push, pull_request] 
+
+# 푸쉬와 풀리퀘스트가 일어났다면 아래 jobs를 실행하게 됨. 해당 예시에서는 test만 하고 있지만 test 외에 빌드와 배포도 가능
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: test_example
+        uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm test
